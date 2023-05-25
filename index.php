@@ -1,10 +1,25 @@
 <?php
 require "./init.php";
+?>
 
-require "./include/header.php";
+<?php require "include/header.php"; ?>
 
-$users = getOne("select * from users where id = 2");
+<div class="row mt-2">
+    <div class="col-md-6 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <?php
 
-dd($users);
+                $user = $_SESSION['user'];
+                if ($user) { ?>
+                    <div>Welcome <?= $user->name; ?></div>
+                <?php } else { ?>
+                    <div>This is HOME PAGE</div>
+                <?php } ?>
 
-require "./include/footer.php";
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php require "include/footer.php"; ?>
