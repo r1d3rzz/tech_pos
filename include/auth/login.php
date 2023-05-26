@@ -1,4 +1,6 @@
 <?php
+error_reporting(1);
+
 require "../../init.php";
 
 if ($_SESSION['user']) {
@@ -45,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <?php require "../header.php"; ?>
 
 <div class="row">
-    <div class="col-md-6 mx-auto mt-2">
+    <div class="col-md-6 mx-auto">
 
         <div class="card">
 

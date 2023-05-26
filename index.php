@@ -4,7 +4,7 @@ require "./init.php";
 
 <?php require "include/header.php"; ?>
 
-<div class="row mt-2">
+<div class="row">
     <div class="col-md-6 mx-auto">
         <div class="card">
             <div class="card-body">
