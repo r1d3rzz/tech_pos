@@ -83,3 +83,26 @@ function categoryPaginate($rec_per_page = 5)
     $data = getAll($sql);
     echo json_encode($data);
 }
+
+function productPaginate($rec_per_page = 5)
+{
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+    } else {
+        $page = 2;
+    }
+
+    if ($page <= 0) {
+        $page = 2;
+    }
+
+    // 1 => 0,5
+    // 2 => 5,5
+    // 3 => 10,5
+
+    $start = ($page - 1) * $rec_per_page;
+    $limit = "$start,$rec_per_page";
+    $sql = "select * from product order by id desc limit $limit";
+    $data = getAll($sql);
+    echo json_encode($data);
+}

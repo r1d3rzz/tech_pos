@@ -3,7 +3,12 @@ require "../init.php";
 
 if (!$_SESSION['user']) require redirect("/");
 
-$products = getAll("select * from product order by id desc");
+$products = getAll("select * from product order by id desc limit 5");
+
+if (isset($_GET['page'])) {
+    productPaginate(5);
+    die();
+}
 
 ?>
 
@@ -44,7 +49,7 @@ $products = getAll("select * from product order by id desc");
                                     <td><?= $product->total_quantity ?></td>
                                     <td><?= $product->sale_price ?></td>
                                     <td class="btn-group">
-                                        <a href="<?= $root . "product/edit.php?action=edit&slug=$product->slug"; ?>" class="btn btn-sm btn-primary">
+                                        <a href="<?= $root . "product/edit.php?action=show&slug=$product->slug"; ?>" class="btn btn-sm btn-primary">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                         <a onclick="return confirm('Are your sure want to delete it?')" href="<?= $root . "product/delete.php?action=delete&slug=$product->slug"; ?>" class="btn btn-sm btn-danger">
@@ -54,10 +59,10 @@ $products = getAll("select * from product order by id desc");
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <span class="mx-2 fw-bold">|</span>
-                                        <a href="<?= $root . "product/edit.php?action=edit&slug=$product->slug"; ?>" class="btn btn-sm btn-outline-danger">
+                                        <a href="<?= $root . "product/edit.php?action=buy&slug=$product->slug"; ?>" class="btn btn-sm btn-outline-danger">
                                             Buy
                                         </a>
-                                        <a href="<?= $root . "product/edit.php?action=edit&slug=$product->slug"; ?>" class="btn btn-sm btn-outline-primary">
+                                        <a href="<?= $root . "product/edit.php?action=sale&slug=$product->slug"; ?>" class="btn btn-sm btn-outline-primary">
                                             Sale
                                         </a>
                                     </td>
@@ -70,9 +75,63 @@ $products = getAll("select * from product order by id desc");
 
                     </tbody>
                 </table>
+
+                <!-- product paginate  -->
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-danger px-4 py-1 fs-5" id="fetchBtn">
+                        <i class="fa-solid fa-angles-down"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <?php require "../include/footer.php"; ?>
+
+<script>
+    $(function() {
+        let page = 1;
+        const tblData = $('#tblData');
+        const fetchBtn = $('#fetchBtn');
+
+        fetchBtn.click(function() {
+            page++;
+            $.get(`index.php?page=${page}`)
+                .then((data) => {
+                    let d = JSON.parse(data);
+                    if (!d.length) return fetchBtn.attr('disabled', 'disabled');
+                    let htmlString = "";
+                    d.map(function(d) {
+                        htmlString += `
+                        <tr>
+                            <td>${d.name}</td>
+                            <td>${d.total_quantity}</td>
+                            <td>${d.sale_price}</td>
+                            <td class="btn-group">
+                                <a href="show.php?action=show&slug=${d.slug}" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a onclick="return confirm('Are your sure want to delete it?')" href="delete.php?action=delete&slug=${d.slug}" class="btn btn-sm btn-danger">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                                <a href="show.php?action=edit&slug=${d.slug}" class="btn btn-sm btn-warning">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <span class="mx-2 fw-bold">|</span>
+                                <a href="show.php?action=buy&slug=${d.slug}" class="btn btn-sm btn-outline-danger">
+                                    Buy
+                                </a>
+                                <a href="show.php?action=sale&slug=${d.slug}" class="btn btn-sm btn-outline-primary">
+                                    Sale
+                                </a>
+                            </td>
+                        </tr>
+                        `;
+                    });
+
+                    tblData.append(htmlString);
+                });
+        });
+    })
+</script>

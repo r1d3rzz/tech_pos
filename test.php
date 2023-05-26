@@ -2,4 +2,4 @@
 
 require "init.php";
 
-categoryPaginate(2);
+productPaginate(5);
