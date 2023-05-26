@@ -13,6 +13,7 @@
                         <a class="text-decoration-none" href="<?= $root . "/include/auth/login.php"; ?>">LOGIN</a>
                     <?php } else { ?>
                         <a class="text-decoration-none" href="<?= $root . "category/index.php"; ?>">CATEGORY</a> |
+                        <a class="text-decoration-none" href="<?= $root . "product/index.php"; ?>">PRODUCT</a> |
                         <a class="text-decoration-none text-danger" href="<?= $root . "include/auth/logout.php"; ?>">LOGOUT</a>
                     <?php } ?>
                 </nav>
