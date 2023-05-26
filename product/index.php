@@ -1,5 +1,8 @@
 <?php
 require "../init.php";
+
+if (!$_SESSION['user']) require redirect("/");
+
 ?>
 
 <?php require "../include/header.php"; ?>
