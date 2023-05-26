@@ -4,7 +4,12 @@ require "../init.php";
 
 if (!$_SESSION['user']) return redirect('/include/auth/login.php');
 
-$categories = getAll("select * from category order by id desc");
+$categories = getAll("select * from category order by id desc limit 2");
+
+if (isset($_GET['page'])) {
+    categoryPaginate(2);
+    die();
+}
 ?>
 
 <?php require "../include/header.php"; ?>
@@ -34,7 +39,7 @@ $categories = getAll("select * from category order by id desc");
                             </tr>
                         <?php } ?>
                     </thead>
-                    <tbody>
+                    <tbody id="tblData">
                         <?php
 
                         if (count($categories)) { ?>
@@ -61,10 +66,10 @@ $categories = getAll("select * from category order by id desc");
                     </tbody>
                 </table>
 
+                <!-- category paginate  -->
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-danger px-4 py-1 fs-5">
+                    <button class="btn btn-danger px-4 py-1 fs-5" id="fetchBtn">
                         <i class="fa-solid fa-angles-down"></i>
-                        <!-- create Paginate  -->
                     </button>
                 </div>
             </div>
@@ -73,3 +78,41 @@ $categories = getAll("select * from category order by id desc");
 </div>
 
 <?php require "../include/footer.php"; ?>
+
+<script>
+    $(function() {
+        let page = 1;
+        const tblData = $('#tblData');
+        const fetchBtn = $('#fetchBtn');
+
+        fetchBtn.click(function() {
+            page++;
+            $.get(`index.php?page=${page}`)
+                .then((data) => {
+                    const d = JSON.parse(data);
+                    let htmlString = ``;
+
+                    if (!d.length) return fetchBtn.attr('disabled', 'disabled');
+
+                    d.map(function(d) {
+                        htmlString += `
+                        <tr>
+                            <td>${d.name}</td>
+                            <td>${d.slug}</td>
+                            <td class="btn-group">
+                                <a onclick="return confirm('Are your sure want to delete it?')" href="delete.php?action=delete&slug=${d.slug}" class="btn btn-sm btn-danger">
+                                     <i class="fa-solid fa-trash"></i>
+                                </a>
+                                <a href="edit.php?action=edit&slug=${d.slug}" class="btn btn-sm btn-warning">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        `;
+                    });
+
+                    tblData.append(htmlString);
+                });
+        });
+    });
+</script>
