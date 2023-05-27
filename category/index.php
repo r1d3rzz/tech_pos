@@ -15,7 +15,7 @@ if (isset($_GET['page'])) {
 <?php require "../include/header.php"; ?>
 
 <div class="row mt-2">
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-8 mx-auto">
         <div class="card">
             <div class="card-body">
                 <div>Category > <small class="badge bg-primary">All</small></div>

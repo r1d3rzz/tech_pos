@@ -15,7 +15,7 @@ if (isset($_GET['page'])) {
 <?php require "../include/header.php"; ?>
 
 <div class="row">
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-8 mx-auto">
         <div class="card">
             <div class="card-body">
                 <div class="mb-2">Product > <small class="badge bg-primary">All</small></div>
@@ -23,8 +23,8 @@ if (isset($_GET['page'])) {
 
 
                 <div class="my-2">
-                    <?php showMsg(); ?>
                     <?php showError(); ?>
+                    <?php showMsg(); ?>
                 </div>
 
                 <table class="table">
@@ -49,7 +49,7 @@ if (isset($_GET['page'])) {
                                     <td><?= $product->total_quantity ?></td>
                                     <td><?= $product->sale_price ?></td>
                                     <td class="btn-group">
-                                        <a href="<?= $root . "product/edit.php?action=show&slug=$product->slug"; ?>" class="btn btn-sm btn-primary">
+                                        <a href="<?= $root . "product/detail.php?action=detail&slug=$product->slug"; ?>" class="btn btn-sm btn-primary">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                         <a onclick="return confirm('Are your sure want to delete it?')" href="<?= $root . "product/delete.php?action=delete&slug=$product->slug"; ?>" class="btn btn-sm btn-danger">
@@ -109,7 +109,7 @@ if (isset($_GET['page'])) {
                             <td>${d.total_quantity}</td>
                             <td>${d.sale_price}</td>
                             <td class="btn-group">
-                                <a href="show.php?action=show&slug=${d.slug}" class="btn btn-sm btn-primary">
+                                <a href="detail.php?action=detail&slug=${d.slug}" class="btn btn-sm btn-primary">
                                     <i class="fas fa-eye"></i>
                                 </a>
                                 <a onclick="return confirm('Are your sure want to delete it?')" href="delete.php?action=delete&slug=${d.slug}" class="btn btn-sm btn-danger">

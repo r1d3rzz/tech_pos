@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <?php require "../include/header.php"; ?>
 
 <div class="row">
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-8 mx-auto">
         <div class="card">
             <div class="card-body">
                 <div class="mb-2">Product > <small class="badge bg-dark">Create</small></div>
