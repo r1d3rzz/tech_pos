@@ -115,7 +115,7 @@ if (isset($_GET['page'])) {
                                 <a onclick="return confirm('Are your sure want to delete it?')" href="delete.php?action=delete&slug=${d.slug}" class="btn btn-sm btn-danger">
                                     <i class="fa-solid fa-trash"></i>
                                 </a>
-                                <a href="show.php?action=edit&slug=${d.slug}" class="btn btn-sm btn-warning">
+                                <a href="edit.php?action=edit&slug=${d.slug}" class="btn btn-sm btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <span class="mx-2 fw-bold">|</span>

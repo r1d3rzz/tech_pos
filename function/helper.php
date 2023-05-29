@@ -12,13 +12,15 @@ function setError($errors)
     $_SESSION['errors'][] = $errors;
 }
 
-$_SESSION['errors'] = [];
 function showError()
 {
-    $errors = $_SESSION['errors'];
-    if (isset($_SESSION['errors']) && count($errors)) {
-        foreach ($errors as $error) {
-            echo "<div class='alert alert-danger'>$error</div>";
+    if (isset($_SESSION['errors'])) {
+        $errors = $_SESSION['errors'];
+        $_SESSION['errors'] = [];
+        if (isset($_SESSION['errors']) && count($errors)) {
+            foreach ($errors as $error) {
+                echo "<div class='alert alert-danger'>$error</div>";
+            }
         }
     }
 }
@@ -50,13 +52,15 @@ function setMsg($message)
     $_SESSION['messages'][] = $message;
 }
 
-$_SESSION['messages'] = [];
 function showMsg()
 {
-    $messages = $_SESSION['messages'];
-    if (isset($_SESSION['messages']) && count($messages)) {
-        foreach ($messages as $message) {
-            echo "<div class='alert alert-warning'>$message</div>";
+    if (isset($_SESSION['messages'])) {
+        $messages = $_SESSION['messages'];
+        $_SESSION['messages'] = [];
+        if (isset($_SESSION['messages']) && count($messages)) {
+            foreach ($messages as $message) {
+                echo "<div class='alert alert-warning'>$message</div>";
+            }
         }
     }
 }
