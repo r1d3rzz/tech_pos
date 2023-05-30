@@ -62,8 +62,11 @@ if (isset($_GET['page'])) {
                                         <a href="<?= $root . "product_buy/index.php?slug=$product->slug"; ?>" class="btn btn-sm btn-outline-danger">
                                             Buy
                                         </a>
-                                        <a href="<?= $root . "product/edit.php?action=sale&slug=$product->slug"; ?>" class="btn btn-sm btn-outline-primary">
+                                        <a onclick="return confirm('Are you sure?')" href="<?= $root . "product_sale/sale.php?action=sale&slug=$product->slug"; ?>" class="btn btn-sm btn-outline-primary">
                                             Sale
+                                        </a>
+                                        <a href="<?= $root . "product_sale/index.php?slug=$product->slug"; ?>" class="btn btn-sm btn-dark">
+                                            Sale List
                                         </a>
                                     </td>
                                 </tr>
@@ -122,8 +125,11 @@ if (isset($_GET['page'])) {
                                 <a href="/product_buy/index.php?slug=${d.slug}" class="btn btn-sm btn-outline-danger">
                                     Buy
                                 </a>
-                                <a href="show.php?action=sale&slug=${d.slug}" class="btn btn-sm btn-outline-primary">
+                                <a onclick="return confirm('Are you sure?')" href="/product_sale/sale.php?action=sale&slug=${d.slug}" class="btn btn-sm btn-outline-primary">
                                     Sale
+                                </a>
+                                <a href="/product_sale/index.php?slug=${d.slug}" class="btn btn-sm btn-dark">
+                                    Sale List
                                 </a>
                             </td>
                         </tr>
