@@ -7,7 +7,7 @@ if (!isset($_SESSION['user'])) return redirect($root);
 if (isset($_GET['slug']) && !empty($_GET['slug'])) {
     $slug = $_GET['slug'];
     $product = getOne("select * from product where slug='$slug'");
-    $buy_products = getAll("select * from product_buy where product_id='$product->id'");
+    $buy_products = getAll("select * from product_buy where product_id='$product->id' order by buy_date desc");
 
     if ($product->slug == $slug) {
         // dd($buy_products);
@@ -31,10 +31,10 @@ if (isset($_GET['slug']) && !empty($_GET['slug'])) {
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
-                    <div class="mb-2">Buy Product > <small class="badge bg-primary">All</small></div>
+                    <div class="mb-2">Buy Product > <small class="badge bg-primary">Info</small></div>
                     <div><a href="/product/index.php" class="btn btn-sm btn-outline-dark">Back</a></div>
                 </div>
-                <a href="<?= $root . "/product_buy/create.php?slug=$slug"; ?>" class="btn btn-sm btn-outline-dark">Buy Product</a>
+                <a href="<?= $root . "product_buy/create.php?slug=$slug"; ?>" class="btn btn-sm btn-outline-dark">Buy Product</a>
 
 
                 <div class="my-2">
