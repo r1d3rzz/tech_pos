@@ -16,7 +16,7 @@ if (isset($_GET['slug']) && !empty($_GET['slug'])) {
     $product = getOne("select * from product where slug='$slug'");
     if ($product->slug != $slug) return productNotFound();
 
-    $buy_product = getOne("select * from product_buy where product_id='$product->id' order by buy_date desc");
+    $buy_product = getOne("select * from product_buy where product_id='$product->id' order by id desc");
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $request = $_REQUEST;

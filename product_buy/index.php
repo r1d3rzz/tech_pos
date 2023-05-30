@@ -7,7 +7,7 @@ if (!isset($_SESSION['user'])) return redirect($root);
 if (isset($_GET['slug']) && !empty($_GET['slug'])) {
     $slug = $_GET['slug'];
     $product = getOne("select * from product where slug='$slug'");
-    $buy_products = getAll("select * from product_buy where product_id='$product->id' order by buy_date desc");
+    $buy_products = getAll("select * from product_buy where product_id='$product->id' order by id desc");
 
     if ($product->slug == $slug) {
         // dd($buy_products);
@@ -60,12 +60,12 @@ if (isset($_GET['slug']) && !empty($_GET['slug'])) {
 
                             <div class="fs-5 my-3 text-muted">Product Name > <small class="badge bg-success"><?= $product->name; ?></small></div>
 
-                            <?php foreach ($buy_products as $product) : ?>
+                            <?php foreach ($buy_products as $p) : ?>
                                 <tr>
-                                    <td><?= $product->buy_price ?></td>
-                                    <td><?= $product->total_quantity ?></td>
-                                    <td><?= $product->buy_date ?></td>
-                                    <td><a href="#" class="btn btn-sm btn-danger">
+                                    <td><?= $p->buy_price ?></td>
+                                    <td><?= $p->total_quantity ?></td>
+                                    <td><?= $p->buy_date ?></td>
+                                    <td><a onclick="return confirm('Are Sure to Delete it?')" href="/product_buy/delete.php?action=delete&slug=<?= $slug ?>&id=<?= $p->id; ?>" class="btn btn-sm btn-danger">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>
                                     </td>
