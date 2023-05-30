@@ -59,7 +59,7 @@ if (isset($_GET['page'])) {
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <span class="mx-2 fw-bold">|</span>
-                                        <a href="<?= $root . "product/edit.php?action=buy&slug=$product->slug"; ?>" class="btn btn-sm btn-outline-danger">
+                                        <a href="<?= $root . "/product_buy/index.php?slug=$product->slug"; ?>" class="btn btn-sm btn-outline-danger">
                                             Buy
                                         </a>
                                         <a href="<?= $root . "product/edit.php?action=sale&slug=$product->slug"; ?>" class="btn btn-sm btn-outline-primary">
@@ -119,7 +119,7 @@ if (isset($_GET['page'])) {
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <span class="mx-2 fw-bold">|</span>
-                                <a href="show.php?action=buy&slug=${d.slug}" class="btn btn-sm btn-outline-danger">
+                                <a href="/product_buy/index.php?slug=${d.slug}" class="btn btn-sm btn-outline-danger">
                                     Buy
                                 </a>
                                 <a href="show.php?action=sale&slug=${d.slug}" class="btn btn-sm btn-outline-primary">
