@@ -1,7 +1,12 @@
 <?php
 require "./init.php";
 
-$date = date('Y-m-d');
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $date = $_REQUEST['date'];
+} else {
+    $date = date('Y-m-d');
+}
+
 $total_sale = getOne("select sum(sale_price) as price from product_sale where date=?", [$date])->price;
 $total_buy = getOne("select sum(buy_price) as price from product_buy where buy_date=?", [$date])->price;
 $net_income = $total_sale - $total_buy;
@@ -41,6 +46,18 @@ $latest_buy = getAll(
 
                 $user = $_SESSION['user'];
                 if ($user) { ?>
+                    <div class="row mb-2">
+                        <div class="col-md">
+                            <form method="POST">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-calendar"></i></span>
+                                    <input type="date" class="form-control" value="<?= $date; ?>" name="date" aria-describedby="basic-addon1">
+                                    <button type="submit" class="btn btn-primary"> Filter <i class="fa-solid fa-filter"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
                     <div class="row text-white text-center">
                         <div class="col-md-4 mb-1">
                             <div class="card bg-success">
@@ -116,7 +133,7 @@ $latest_buy = getAll(
                                             </tbody>
                                         </table>
                                     <?php } else { ?>
-                                        <div class="alert alert-warning text-center">Empty Sale List for Today</div>
+                                        <div class="alert alert-warning text-center">Empty Sale List</div>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -145,7 +162,7 @@ $latest_buy = getAll(
                                             </tbody>
                                         </table>
                                     <?php } else { ?>
-                                        <div class="alert alert-warning text-center">Empty Buy List for Today</div>
+                                        <div class="alert alert-danger text-center">Empty Buy List</div>
                                     <?php } ?>
                                 </div>
                             </div>
