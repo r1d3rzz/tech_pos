@@ -32,7 +32,7 @@ if (isset($_GET['slug']) && !empty($_GET['slug'])) {
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="mb-2">Buy Product > <small class="badge bg-primary">Info</small></div>
-                    <div><a href="/product/index.php" class="btn btn-sm btn-outline-dark">Back</a></div>
+                    <div><a href="/product/index.php" class="btn btn-sm btn-dark">Back</a></div>
                 </div>
                 <a href="<?= $root . "product_buy/create.php?slug=$slug"; ?>" class="btn btn-sm btn-outline-dark">Buy Product</a>
 
@@ -58,7 +58,7 @@ if (isset($_GET['slug']) && !empty($_GET['slug'])) {
 
                         if (count($buy_products)) { ?>
 
-                            <div class="fs-5 my-3 text-muted">Product Name > <small class="badge bg-success"><?= $product->name; ?></small></div>
+                            <div class="fs-5 my-3 text-muted">Product Name > <a href="<?= $root . "product/detail.php?action=detail&slug=$product->slug"; ?>"><small class="badge bg-success"><?= $product->name; ?></small></a></div>
 
                             <?php foreach ($buy_products as $p) : ?>
                                 <tr>

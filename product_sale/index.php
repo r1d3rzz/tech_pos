@@ -30,7 +30,7 @@ if (isset($_GET['slug']) && !empty($_GET['slug'])) {
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="mb-2 fs-4">Sale List</div>
-                    <div><a href="/product/index.php" class="btn btn-sm btn-outline-dark">Back</a></div>
+                    <div><a href="/product/index.php" class="btn btn-sm btn-dark">Back</a></div>
                 </div>
 
                 <div class="my-2">

@@ -27,13 +27,14 @@ function showError()
 
 function hasError()
 {
-    $errors = $_SESSION['errors'];
+    if (isset($_SESSION['errors'])) {
+        $errors = $_SESSION['errors'];
 
-    if (count($errors)) {
-        return true;
+        if (count($errors)) {
+            return true;
+        }
+        return false;
     }
-
-    return false;
 }
 
 function redirect($path)
