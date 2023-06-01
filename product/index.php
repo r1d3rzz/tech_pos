@@ -52,9 +52,6 @@ if (isset($_GET['page'])) {
                                         <a href="<?= $root . "product/detail.php?action=detail&slug=$product->slug"; ?>" class="btn btn-sm btn-primary">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a onclick="return confirm('Are your sure want to delete it?')" href="<?= $root . "product/delete.php?action=delete&slug=$product->slug"; ?>" class="btn btn-sm btn-danger">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </a>
                                         <a href="<?= $root . "product/edit.php?action=edit&slug=$product->slug"; ?>" class="btn btn-sm btn-warning">
                                             <i class="fas fa-edit"></i>
                                         </a>
@@ -62,9 +59,13 @@ if (isset($_GET['page'])) {
                                         <a href="<?= $root . "product_buy/index.php?slug=$product->slug"; ?>" class="btn btn-sm btn-outline-danger">
                                             Buy
                                         </a>
-                                        <a onclick="return confirm('Are you sure?')" href="<?= $root . "product_sale/sale.php?action=sale&slug=$product->slug"; ?>" class="btn btn-sm btn-outline-primary">
-                                            Sale
-                                        </a>
+                                        <?php if ($product->total_quantity > 0) { ?>
+                                            <a href="<?= $root . "product_sale/sale.php?action=sale&slug=$product->slug"; ?>" class="btn btn-sm btn-outline-primary">
+                                                Sale
+                                            </a>
+                                        <?php } else { ?>
+                                            <button class="btn btn-sm btn-outline-primary" disabled>Sale</button>
+                                        <?php } ?>
                                         <a href="<?= $root . "product_sale/index.php?slug=$product->slug"; ?>" class="btn btn-sm btn-dark">
                                             Sale List
                                         </a>
@@ -115,9 +116,6 @@ if (isset($_GET['page'])) {
                                 <a href="detail.php?action=detail&slug=${d.slug}" class="btn btn-sm btn-primary">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a onclick="return confirm('Are your sure want to delete it?')" href="delete.php?action=delete&slug=${d.slug}" class="btn btn-sm btn-danger">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
                                 <a href="edit.php?action=edit&slug=${d.slug}" class="btn btn-sm btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </a>
@@ -125,7 +123,7 @@ if (isset($_GET['page'])) {
                                 <a href="/product_buy/index.php?slug=${d.slug}" class="btn btn-sm btn-outline-danger">
                                     Buy
                                 </a>
-                                <a onclick="return confirm('Are you sure?')" href="/product_sale/sale.php?action=sale&slug=${d.slug}" class="btn btn-sm btn-outline-primary">
+                                <a href="/product_sale/sale.php?action=sale&slug=${d.slug}" class="btn btn-sm btn-outline-primary">
                                     Sale
                                 </a>
                                 <a href="/product_sale/index.php?slug=${d.slug}" class="btn btn-sm btn-dark">
